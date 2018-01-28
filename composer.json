@@ -1,0 +1,18 @@
+{
+    "name": "ninvfeng/mongodb",
+    "description": "一个简单mongodb数据库操作类",
+    "authors": [
+        {
+            "name": "ninvfeng",
+            "email": "ninvfeng@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ninvfeng\\mongodb": "src/"
+        }
+    }
+}

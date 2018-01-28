@@ -1,1 +1,1 @@
-#mongodb
+#一个简单mongodb数据库操作类
