@@ -1,6 +1,6 @@
 {
     "name": "ninvfeng/mongodb",
-    "description": "一个简单mongodb数据库操作类",
+    "description": "一个简单php7 mongodb数据库操作类",
     "authors": [
         {
             "name": "ninvfeng",
