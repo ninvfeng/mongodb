@@ -21,7 +21,7 @@ $mongo->where(['user'=>'lvlv'])->save(['pass'=>'password2']);
 $mongo->where(['user'=>'lvlv'])->find();
 
 //查找全部
-$mongo->select();
+$mongo->page(1)->select();
 
 //查找并删除 原子操作
 $mongo->where(['user'=>'lvlv'])->findAndRemove();
