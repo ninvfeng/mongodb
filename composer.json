@@ -1,6 +1,9 @@
 {
     "name": "ninvfeng/mongodb",
     "description": "一个简单php7 mongodb数据库操作类",
+    "license":"MIT",
+    "version":"1.0",
+    "keywords" : [ "php", "mongodb" ],
     "authors": [
         {
             "name": "ninvfeng",
