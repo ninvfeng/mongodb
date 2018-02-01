@@ -1,5 +1,5 @@
 <?php
-
+namespace ninvfeng\mongodb;
 class mongodb{
 
     public $mongodb='';
