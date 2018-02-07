@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ninvfeng\\mongodb\\": "src/"
+            "ninvfeng\\": "src/"
         }
     }
 }
