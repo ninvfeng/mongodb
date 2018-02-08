@@ -12,16 +12,16 @@ class mongodb{
 
     public $option=[];
 
-    public function __construct($table,$db='test',$host="127.0.0.1",$port="27017"){
+    public function __construct($table,$config=['name'=>'test','host'=>'127.0.0.1','port'=>27017]){
 
         //实例化mongodb对象
-        $this->mongodb = new \MongoDB\Driver\Manager("mongodb://$host:$port");
+        $this->mongodb = new \MongoDB\Driver\Manager("mongodb://".$config['host'].":".$config['port']);
 
         //表
         $this->table=$table;
 
         //库
-        $this->db=$db;
+        $this->db=$config['name'];
     }
 
     //返回原生mongodb对象
@@ -51,7 +51,7 @@ class mongodb{
     public function insert($arr){
         $bulk = new \MongoDB\Driver\BulkWrite;
         $bulk->insert($arr);
-        return $this->mongodb->executeBulkWrite($this->db.'.'.$this->table, $bulk);
+        return $this->mongodb->executeBulkWrite($this->db.'.'.$this->table, $bulk)->getInsertedCount();
     }
 
     //删除记录
@@ -60,8 +60,7 @@ class mongodb{
         $filter=$this->filter;
         // $filter['limit']=0;
         $bulk->delete($filter);
-        $res=$this->mongodb->executeBulkWrite($this->db.'.'.$this->table, $bulk);
-        return $res->getDeletedCount();
+        return $this->mongodb->executeBulkWrite($this->db.'.'.$this->table, $bulk)->getDeletedCount();
     }
 
     //修改记录
@@ -69,7 +68,7 @@ class mongodb{
         $bulk = new \MongoDB\Driver\BulkWrite;
         $bulk->update($this->filter,['$set' => $data],['multi' => false, 'upsert' => false]);
         $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 1000);
-        return $this->mongodb->executeBulkWrite($this->db.'.'.$this->table, $bulk, $writeConcern);
+        return $this->mongodb->executeBulkWrite($this->db.'.'.$this->table, $bulk, $writeConcern)->getModifiedCount();
     }
 
     //查找一条记录
