@@ -48,7 +48,7 @@ class mongodb{
     }
 
     //添加记录
-    public function add($arr){
+    public function insert($arr){
         $bulk = new \MongoDB\Driver\BulkWrite;
         $bulk->insert($arr);
         return $this->mongodb->executeBulkWrite($this->db.'.'.$this->table, $bulk);
@@ -65,7 +65,7 @@ class mongodb{
     }
 
     //修改记录
-    public function save($data){
+    public function update($data){
         $bulk = new \MongoDB\Driver\BulkWrite;
         $bulk->update($this->filter,['$set' => $data],['multi' => false, 'upsert' => false]);
         $writeConcern = new \MongoDB\Driver\WriteConcern(\MongoDB\Driver\WriteConcern::MAJORITY, 1000);
