@@ -17,50 +17,56 @@ $config=[
     'name'=>'test'
 ]
 
-//实例化
-$mongo=new mongodb($table,$config);
+//推荐使用函数进行实例化,后续操作更加方便
+function mongodb($table='null') use $config{
+    static $_mongodb;
+    if(!$_mongodb){
+        $_mongodb=new \ninvfeng\mysql($config);
+    }
+    return $_mongodb->table($table);
+}
 ```
 ### 增
 ```
-$mongo->add(['user'=>'ninvfeng','pass'=>'password']);
-$mongo->add(['user'=>'lvlv','pass'=>'password']);
+mongodb('user')->add(['user'=>'ninvfeng','pass'=>'password']);
+mongodb('user')->add(['user'=>'lvlv','pass'=>'password']);
 ```
 ### 删
 ```
-$mongo->where(['user'=>'ninvfeng'])->delete();
+mongodb('user')->where(['user'=>'ninvfeng'])->delete();
 ```
 
 ### 改
 ```
-$mongo->where(['user'=>'lvlv'])->save(['pass'=>'password2']);
+mongodb('user')->where(['user'=>'lvlv'])->save(['pass'=>'password2']);
 ```
 
 ### 查找一条
 ```
-$mongo->where(['user'=>'lvlv'])->find();
+mongodb('user')->where(['user'=>'lvlv'])->find();
 ```
 
 ### 查找&&分页
 ```
-$mongo->page(1)->select();
+mongodb('user')->page(1)->select();
 ```
 
 ### 查找并删除 原子操作
 ```
-$mongo->where(['user'=>'lvlv'])->findAndRemove();
+mongodb('user')->where(['user'=>'lvlv'])->findAndRemove();
 ```
 
 ### 统计
 ```
-$mongo->count();
+mongodb('user')->count();
 ```
 
 ### 调用函数
 ```
-$mongo->func();
+mongodb('user')->func();
 ```
 
 ### 返回原生对象
 ```
-$mongo->mongodb();
+mongodb('user')->mongodb();
 ```

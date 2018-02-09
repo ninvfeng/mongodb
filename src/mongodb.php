@@ -12,13 +12,10 @@ class mongodb{
 
     public $option=[];
 
-    public function __construct($table,$config=['name'=>'test','host'=>'127.0.0.1','port'=>27017]){
+    public function __construct($config=['name'=>'test','host'=>'127.0.0.1','port'=>27017]){
 
         //实例化mongodb对象
         $this->mongodb = new \MongoDB\Driver\Manager("mongodb://".$config['host'].":".$config['port']);
-
-        //表
-        $this->table=$table;
 
         //库
         $this->db=$config['name'];
@@ -27,6 +24,12 @@ class mongodb{
     //返回原生mongodb对象
     public function mongodb(){
         return $this->mongodb;
+    }
+
+    //设置操作表
+    public function table($table){
+        $this->table=$table;
+        return $this;
     }
 
     //条件
