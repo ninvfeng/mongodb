@@ -10,16 +10,16 @@
 
 ## 初始化
 ```
-//配置
-$config=[
-    'host'=>'127.0.0.1',
-    'port'=>27017,
-    'name'=>'test'
-]
-
 //推荐使用函数进行实例化,后续操作更加方便
-function mongodb($table='null') use $config{
+function mongodb($table='null'){
     static $_mongodb;
+    
+    //配置
+    $config=[
+        'host'=>'127.0.0.1',
+        'port'=>27017,
+        'name'=>'test'
+    ]
     if(!$_mongodb){
         $_mongodb=new \ninvfeng\mysql($config);
     }
@@ -28,8 +28,8 @@ function mongodb($table='null') use $config{
 ```
 ### 增
 ```
-mongodb('user')->add(['user'=>'ninvfeng','pass'=>'password']);
-mongodb('user')->add(['user'=>'lvlv','pass'=>'password']);
+mongodb('user')->insert(['user'=>'ninvfeng','pass'=>'password']);
+mongodb('user')->insert(['user'=>'lvlv','pass'=>'password']);
 ```
 ### 删
 ```
@@ -38,7 +38,7 @@ mongodb('user')->where(['user'=>'ninvfeng'])->delete();
 
 ### 改
 ```
-mongodb('user')->where(['user'=>'lvlv'])->save(['pass'=>'password2']);
+mongodb('user')->where(['user'=>'lvlv'])->update(['pass'=>'password2']);
 ```
 
 ### 查找一条
